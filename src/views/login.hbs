@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>To-Do Login</title>
+</head>
+<body>
+
+{{> header}}
+
+<main>
+  <form method="post">
+    <fieldset>
+
+      <legend>Login</legend>
+
+      {{#if invalidations}}
+
+        <aside>
+
+          {{#each invalidations as |invalidation|}}
+
+            <p><strong>{{invalidation}}</strong><p>
+
+          {{/each}}
+
+        </aside>
+
+      {{/if}}
+
+      <label>
+        Email
+        <input type="email" name="email" value="{{email}}" required>
+      </label>
+
+      <label>
+        Password
+        <input type="password" name="password" required>
+      </label>
+
+      <button type="submit">Login</button>
+
+      <p>…or <a href="/signup">sign up</a>.</p>
+
+    </fieldset>
+  </form>
+</main>
+
+{{> footer}}
+
+</body>
+</html>

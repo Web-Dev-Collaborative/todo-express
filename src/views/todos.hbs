@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>To-Dos</title>
+</head>
+<body>
+
+{{> header}}
+
+<hr>
+
+<main>
+
+  {{#if adding}}
+
+    <fieldset>
+      <legend>Create To-Do</legend>
+      <form method="post">
+
+        <label>
+          To-Do Name
+          <input type="text" name="name" required>
+        </label>
+
+        <label>
+          To-Do Description
+          <textarea name="description" required></textarea>
+        </label>
+
+        <button name="add" type="submit">Save To-Do</button>
+      </form>
+      <!-- Separate form to enable submission when fields are empty -->
+      <form method="post">
+
+        <button name="cancel" type="submit">Cancel</button>
+
+      </form>
+    </fieldset>
+
+  {{else}}
+
+    <form method="post">
+      <button name="addForm" type="submit">Add To-Do</button>
+    </form>
+
+  {{/if}}
+
+  {{#unless todos}}
+
+    <p>There are currently no todos.<p>
+
+  {{/unless}}
+
+  {{#each todos as |todo todoIndex|}}
+
+    <hr>
+
+    {{#if todo.editing}}
+
+      <fieldset>
+        <legend>Edit To-Do</legend>
+        <form method="post">
+
+          <input type="hidden" name="id" value="{{todo.id}}">
+
+          <label>
+            To-Do Name
+            <input type="text" name="name" value="{{todo.name}}" required>
+          </label>
+
+          <label>
+            To-Do Description
+            <textarea name="description" required>{{todo.description}}</textarea>
+          </label>
+
+          <button name="update" type="submit">Save To-Do</button>
+
+        </form>
+        <!-- Separate form to enable submission when fields are empty -->
+        <form method="post">
+
+          <button name="cancel" type="submit">Cancel</button>
+
+        </form>
+      </fieldset>
+
+    {{else}}
+
+      <article>
+        <header>
+          <h1>{{todo.name}}</h1>
+          <form method="post">
+
+            <input type="hidden" name="id" value="{{todo.id}}">
+
+            <button name="editForm" type="submit">Edit To-Do</button>
+            <button name="remove" type="submit">Remove To-Do</button>
+
+          </form>
+        </header>
+        <p>{{todo.description}}</p>
+      </article>
+
+    {{/if}}
+
+  {{/each}}
+
+</main>
+
+<hr>
+
+{{> footer}}
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<header>
+  <h1>To-Do</h1>
+  <h2>Written with Express.js</h2>
+
+  {{#if user}}
+
+    <form action="/logout" method="post">
+
+      <p>Hi, {{user.firstName}}! <button type="submit">Logout</button></p>
+
+    </form>
+
+  {{/if}}
+
+</header>
